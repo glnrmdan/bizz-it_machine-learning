@@ -1,0 +1,14 @@
+bin/
+lib/
+lib64
+models/
+pyvenv.cfg
+.vscode/
+.idea/
+share/
+data/Logos/
+data/Logos-dev/
+src/BCC.v1-bccd.coco/
+src/bccd_coco_tfrecords/
+src/exported_model/
+src/trained_model/
