@@ -15,3 +15,4 @@ src/trained_model/
 bizit-dev_test-data/
 src/ssd_mobilenet_v2/
 models/research/object_detection/protos/
+data/bizit-dev_train-data/
