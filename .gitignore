@@ -12,3 +12,6 @@ src/BCC.v1-bccd.coco/
 src/bccd_coco_tfrecords/
 src/exported_model/
 src/trained_model/
+bizit-dev_test-data/
+src/ssd_mobilenet_v2/
+models/research/object_detection/protos/

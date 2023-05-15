@@ -2,6 +2,7 @@
 
 ### Requirement
 - python3.9.16
+- [labelImg](https://github.com/heartexlabs/labelImg)
 - [ TensorFlow Object Detection Models API](https://github.com/tensorflow/models/tree/master/research/object_detection)
 
 ### How to Build
