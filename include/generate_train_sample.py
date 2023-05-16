@@ -1,7 +1,7 @@
 import os
-from PIL import Image
 import numpy as np
 import argparse
+from im_utils import into_jpg_format, resize_im
 
 # Initiate argument parser
 parser = argparse.ArgumentParser(
@@ -22,7 +22,7 @@ parser.add_argument('-n',
                     help='Number of train data to be taken for training',
                     type=int
                     )
-parser.add_argument('-n_subdir',
+parser.add_argument('-ns',
                     '--num_subdir',
                     help='Number of sub-directory that the train data will be taken (if sub-directory exist)',
                     type=int, default=1
@@ -31,17 +31,6 @@ args = parser.parse_args()
 
 ROOT_PATH = os.getcwd()
 
-
-def into_jpg_format(im, filename, output_path=ROOT_PATH):
-    pil_image = Image.fromarray(im)
-    rgb_image = pil_image.convert('RGB')
-    rgb_image.save(os.path.join(output_path, f'{filename}'))
-
-
-def resize_im(im_path):
-    im = Image.open(im_path)
-    im = im.resize((320, 320))
-    return np.asarray(im)
 
 def get_subset_data(im_path, n_subset, n_subdir):
     # iterate directory
@@ -72,5 +61,5 @@ def main():
 
 
 if __name__ == '__main__':
-    print(args) 
+    print('Running...') 
     main()
