@@ -25,7 +25,7 @@ parser.add_argument('-n',
 parser.add_argument('-n_subdir',
                     '--num_subdir',
                     help='Number of sub-directory that the train data will be taken (if sub-directory exist)',
-                    type=int, default=2
+                    type=int, default=1
                     )
 args = parser.parse_args()
 
@@ -43,24 +43,29 @@ def resize_im(im_path):
     im = im.resize((320, 320))
     return np.asarray(im)
 
-def get_subset_data(im_path, n_subset, n_subdir=2):
+def get_subset_data(im_path, n_subset, n_subdir):
     # iterate directory
-    for dir in os.listdir(im_path):
-        # check if it's containing sub-dir
-        if os.path.isdir(os.path.join(im_path, dir)):
-            num_im_taken = int(n_subset / (len(os.listdir(im_path))*n_subdir))
-            subdir_contents = np.random.choice(os.listdir(os.path.join(im_path, dir)), n_subdir)
-            # iterate sub-directory
-            for sub_dir in subdir_contents:
-                im_contents = np.random.choice(os.listdir(os.path.join(im_path, dir, sub_dir)), num_im_taken)
-                for im in im_contents:
-                    _im = resize_im(os.path.join(im_path, dir, sub_dir, im))
-                    into_jpg_format(_im, im, args.output_path)
+    if n_subdir > 1:
+        for dir in os.listdir(im_path):
+            # check if it's containing sub-dir
+            if os.path.isdir(os.path.join(im_path, dir)):
+                num_im_taken = int(n_subset / (len(os.listdir(im_path))*n_subdir))
+                subdir_contents = np.random.choice(os.listdir(os.path.join(im_path, dir)), n_subdir)
+                # iterate sub-directory
+                for sub_dir in subdir_contents:
+                    # get random samples of image in sub-directory
+                    im_contents = np.random.choice(os.listdir(os.path.join(im_path, dir, sub_dir)), num_im_taken)
+                    for im in im_contents:
+                        _im = resize_im(os.path.join(im_path, dir, sub_dir, im))
+                        into_jpg_format(_im, f'{sub_dir}-{im}', args.output_path)
 
-        # images_path = os.path.join(args.image_input_dir, dir)
-        # dir_len = len(os.listdir(images_path))
-        # n_rand = np.random.randint(dir_len)
-        # print(n_rand)
+    else:
+        im_contents = np.random.choice(os.listdir(im_path), n_subset)
+        print(len(im_contents))
+        for i, im in enumerate(im_contents):
+            _im = resize_im(os.path.join(im_path, im))
+            into_jpg_format(_im, f'{i}_{im}', args.output_path)
+
 
 def main():
     get_subset_data(args.image_input_dir, args.num_train_data, args.num_subdir)
@@ -69,8 +74,3 @@ def main():
 if __name__ == '__main__':
     print(args) 
     main()
-    # for dir in os.listdir(TRAIN_DATA_PATH):
-    #     for subdir in os.listdir(os.path.join(TRAIN_DATA_PATH, dir)):
-    #         for file in os.listdir(os.path.join(TRAIN_DATA_PATH, dir, subdir)):
-    #             im = resize_im(os.path.join(TRAIN_DATA_PATH, dir, subdir, file))
-    #             into_jpg_format(im, f'{subdir}-{file}', TRAIN_DATA_TARGET_PATH)
