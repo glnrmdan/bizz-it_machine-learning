@@ -14,6 +14,9 @@ src/exported_model/
 src/trained_model/
 bizit-dev_test-data/
 src/ssd_mobilenet_v2/
-models/research/object_detection/protos/
 data/bizit-dev_train-data/
 src/output/
+data/LogoDet-3K
+data/test
+data/bizit-dev_train-data2/
+data/bizit-dev_train-data_combine/
