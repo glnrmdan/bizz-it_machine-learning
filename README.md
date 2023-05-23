@@ -9,7 +9,7 @@
 - create virtual environment with python 3.9.16
 
 ### TensorBoard
-[TensorBoard](https://tensorboard.dev/experiment/9f92l5PdTwqimvyHAMaqnw/) benchmark train over 5000 steps with current 
+[TensorBoard](https://tensorboard.dev/experiment/EHPczaYESO632GBCeQxDvg/#scalars) benchmark train over 10000 steps with current 
 loss ~15%
 
 ### Data
