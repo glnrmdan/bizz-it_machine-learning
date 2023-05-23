@@ -22,6 +22,11 @@ parser.add_argument('-n',
                     help='Number of train data to be taken for training',
                     type=int
                     )
+parser.add_argument('-s',
+                    '--im_size',
+                    help='Size of the images',
+                    type=int
+                    )
 parser.add_argument('-ns',
                     '--num_subdir',
                     help='Number of sub-directory that the train data will be taken (if sub-directory exist)',
@@ -49,13 +54,13 @@ def get_subset_data(im_path, n_subset, n_subdir):
                         _, file_format = os.path.splitext(im)
                         if file_format == '.xml':
                             continue
-                        _im = resize_im(os.path.join(im_path, dir, sub_dir, im))
+                        _im = resize_im(os.path.join(im_path, dir, sub_dir, im), args.im_size)
                         into_jpg_format(_im, f'{sub_dir}-{im}', args.output_path)
 
     else:
         im_contents = np.random.choice(os.listdir(im_path), n_subset)
         for i, im in enumerate(im_contents):
-            _im = resize_im(os.path.join(im_path, im))
+            _im = resize_im(os.path.join(im_path, im), args.im_size)
             into_jpg_format(_im, f'{i}_{im}', args.output_path)
 
 

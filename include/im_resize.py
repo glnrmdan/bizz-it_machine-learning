@@ -9,6 +9,11 @@ parser.add_argument('-x',
                     help='Path to the image folder to be process',
                     type=str
                     )
+parser.add_argument('-s',
+                    '--im_size',
+                    help='Size of the images',
+                    type=int
+                    )
 parser.add_argument('-o',
                     '--output_dir',
                     help='Path to the image output folder',
@@ -21,5 +26,5 @@ if __name__ == '__main__':
     if args.output_dir == None:
         args.output_dir = args.input_dir
     for file in os.listdir(args.input_dir):
-        im = resize_im(os.path.join(args.input_dir, file))
+        im = resize_im(os.path.join(args.input_dir, file), args.im_size)
         into_jpg_format(im, file, args.output_dir)

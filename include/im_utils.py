@@ -16,9 +16,9 @@ def into_jpg_format(im, filename, output_path=ROOT_PATH):
     rgb_image.save(os.path.join(output_path, f'{filename}'))
 
 
-def resize_im(im_path):
+def resize_im(im_path, size):
         im = Image.open(im_path)
-        im = im.resize((320, 320))
+        im = im.resize((size, size))
         return np.asarray(im)
 
 def plot_image_to_figure(images, rows, columns):

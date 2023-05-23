@@ -11,6 +11,7 @@ data/Logos-Dev/
 src/BCC.v1-bccd.coco/
 src/bccd_coco_tfrecords/
 src/exported_model/
+src/based_model
 src/trained_model/
 bizit-dev_test-data/
 src/ssd_mobilenet_v2/
@@ -19,4 +20,5 @@ src/output/
 data/LogoDet-3K
 data/test
 data/bizit-dev_train-data2/
+data/temp
 data/bizit-dev_train-data_combine/
