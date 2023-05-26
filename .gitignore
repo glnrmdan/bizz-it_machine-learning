@@ -22,3 +22,6 @@ data/test
 data/bizit-dev_train-data2/
 data/temp
 data/bizit-dev_train-data_combine/
+src/based_model_efficientnet/
+src/efficientnet512_ft/
+src/ssd_mobilenet_v2_ft

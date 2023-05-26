@@ -12,6 +12,9 @@
 [TensorBoard](https://tensorboard.dev/experiment/EHPczaYESO632GBCeQxDvg/#scalars) benchmark train over 10000 steps with current 
 loss ~15%
 
+### Pre-trained Model
+You can found all version of already trained logo detector in this [drive](https://drive.google.com/drive/folders/1ISA4hILdAJrESwZ71TX7Bp_vgzXkrMG6?usp=share_link)
+
 ### Data
 [Link to data source](https://drive.google.com/drive/folders/1V5NAcnV284AXiRrVBwyOM3i5Svn82gkV?usp=share_link)
 
