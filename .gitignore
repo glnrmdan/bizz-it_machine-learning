@@ -16,6 +16,7 @@ src/logo-detector/ssd_mobilenet_v2_ft
 src/logo-detector/trained_model/
 src/logo-detector/output/
 src/logo-detector/ssd_mobilenet_v2/
+src/logo-detector/im_similar/
 bizit-dev_test-data/
 data/bizit-dev_train-data/
 data/LogoDet-3K
@@ -23,5 +24,8 @@ data/test
 data/bizit-dev_train-data2/
 data/temp
 data/bizit-dev_train-data_combine/
+data/bizz.it-sim_dataset_1
+data/bizz.it-sim_dataset_2
+data/bizz.it-sim_dataset
 data/Logos/
 data/Logos-Dev/

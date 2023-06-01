@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
 from PIL import Image
+from model import ImageParser
 import tensorflow as tf
 import json
 import numpy as np
@@ -17,8 +17,6 @@ FR_MODEL_PATH = None
 
 ld_detector = tf.saved_model.load(LD_MODEL_PATH)
 
-class ImageParser(BaseModel):
-    image: str
 
 app = FastAPI()
 
