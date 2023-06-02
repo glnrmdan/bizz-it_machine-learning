@@ -4,7 +4,7 @@ import json
 
 
 # request data
-im = '/home/irizqy/ml_ws/bangkit-ws/data/test/2_20230507_092258.jpg'
+im = '/home/irizqy/ml_ws/bangkit-ws/data/temp/32_IMG20230504165642.jpg'
 with open(im, "rb") as f:
     im_bytes = f.read()        
 im_b64 = base64.b64encode(im_bytes).decode("utf8")
