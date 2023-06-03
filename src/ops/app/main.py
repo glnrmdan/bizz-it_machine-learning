@@ -9,7 +9,7 @@ import os
 
 
 # logo detector model path
-LD_MODEL_PATH = '/home/irizqy/ml_ws/bangkit-ws/src/logo-detector/efficientnet512_ft/saved_model'
+LD_MODEL_PATH = './app/model/model_v1/saved_model/'
 LD_LABEL_PATH = '/home/irizqy/ml_ws/bangkit-ws/data/label_map.pbtxt'
 
 FR_MODEL_PATH = None
