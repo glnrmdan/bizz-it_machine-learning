@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from PIL import Image
 from model import ImageParser
 import tensorflow as tf
-import json
 import numpy as np
 import base64
 import io
