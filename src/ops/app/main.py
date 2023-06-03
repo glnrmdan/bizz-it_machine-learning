@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from PIL import Image
-from model import ImageParser
+from app.model import ImageParser
 import tensorflow as tf
 import numpy as np
 import base64
