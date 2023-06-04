@@ -16,7 +16,7 @@ loss ~15%
 You can found all version of already trained logo detector in this [drive](https://drive.google.com/drive/folders/1ISA4hILdAJrESwZ71TX7Bp_vgzXkrMG6?usp=share_link)
 
 ### Data
-[Link to data source](https://drive.google.com/drive/folders/1V5NAcnV284AXiRrVBwyOM3i5Svn82gkV?usp=share_link)
+[Link to data source](https://drive.google.com/drive/folders/10NrRE4ZYUsQTDwSQ3vVutFnKkFhKS8aQ?usp=sharing)
 
 ### References
 - [TensorFlow Object Detection API](https://github.com/tensorflow/models/tree/master/research/object_detection)
