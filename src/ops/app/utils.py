@@ -5,6 +5,10 @@ import os
 def cropped_detected_im(detections, im, save_path=os.getcwd()):
     width, height, _ = im.shape
     dets_index = np.where(detections['detection_scores'][0] >= .5)[0]
+
+    if dets_index.shape[0] == 0:
+        return 0
+
     cropped_ims = []
 
     for i in dets_index:
