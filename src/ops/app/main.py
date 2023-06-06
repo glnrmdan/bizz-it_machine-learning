@@ -30,6 +30,9 @@ async def detect_logo(im: ImageParser):
     im = Image.open(io.BytesIO(img_bytes))
     im_arr = np.asarray(im)
 
+    if im_arr.shape[2] == 4:
+        im_arr = im_arr[:,:,:3]
+
     input_tensor = tf.convert_to_tensor(im_arr)
     input_tensor = input_tensor[tf.newaxis, ...]
     detections = ld_detector(input_tensor)
@@ -44,4 +47,5 @@ async def detect_logo(im: ImageParser):
     response_json = {
         "status": 1 
     }
+    
     return response_json

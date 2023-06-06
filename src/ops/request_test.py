@@ -4,8 +4,8 @@ import json
 
 
 # request data
-im = '/home/irizqy/ml_ws/bangkit-ws/data/temp/32_IMG20230504165642.jpg'
-# im = '/home/irizqy/Downloads/tugu.jpeg'
+# im = '/home/irizqy/ml_ws/bangkit-ws/data/temp/32_IMG20230504165642.jpg'
+im = '/home/irizqy/Downloads/rfc.jpg'
 
 with open(im, "rb") as f:
     im_bytes = f.read()        
