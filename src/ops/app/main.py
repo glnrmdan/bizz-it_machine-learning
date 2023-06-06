@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 from PIL import Image
 from app.model import ImageParser
+from app.utils import cropped_detected_im
 import tensorflow as tf
 import numpy as np
 import base64
 import io
-import os
+import json
 
 
 # logo detector model path
@@ -24,28 +25,34 @@ def index():
     return {'greetings': 'Hello World!'}
 
 
-@app.post('/ld_predict')
+@app.post('/ld_predict', status_code=200)
 async def detect_logo(im: ImageParser):
-    img_bytes = base64.b64decode(im.image.encode('utf-8'))
-    im = Image.open(io.BytesIO(img_bytes))
-    im_arr = np.asarray(im)
-
-    if im_arr.shape[2] == 4:
-        im_arr = im_arr[:,:,:3]
-
-    input_tensor = tf.convert_to_tensor(im_arr)
-    input_tensor = input_tensor[tf.newaxis, ...]
-    detections = ld_detector(input_tensor)
-
-    width, height, _ = im_arr.shape
-    print(detections['detection_boxes'][0][0])
-    ymin, xmin, ymax, xmax = detections['detection_boxes'][0][0]
-    (left, right, top, bottom) = (xmin*width, xmax*width, ymin*height, ymax*height)
-    cropped_im = im_arr[int(top):int(bottom), int(left):int(right)]
-    Image.fromarray(cropped_im).save(os.path.join(os.getcwd(), 'cropped-logo.jpg'))
 
     response_json = {
-        "status": 1 
-    }
+            'status': 400,
+            'message': 'Incorrect data format'
+        }
     
-    return response_json
+    try:
+        img_bytes = base64.b64decode(im.image.encode('utf-8'))
+        im = Image.open(io.BytesIO(img_bytes))
+        im_arr = np.asarray(im)
+
+        # take only RGB values from RGBA images
+        if im_arr.shape[2] == 4:
+            im_arr = im_arr[:,:,:3]
+
+        input_tensor = tf.convert_to_tensor(im_arr)
+        input_tensor = input_tensor[tf.newaxis, ...]
+        detections = ld_detector(input_tensor)
+
+        cropped_ims = cropped_detected_im(detections, im_arr)
+    
+        response_json = {
+            'status': 1,
+            'length': len(cropped_ims)
+        }
+    except Exception:
+        pass
+
+    return json.dumps(response_json)
