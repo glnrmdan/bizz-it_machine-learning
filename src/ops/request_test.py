@@ -4,8 +4,8 @@ import json
 
 
 # request data
-# im = '/home/irizqy/ml_ws/bangkit-ws/data/test/2_20230507_092258.jpg'
-im = '/home/irizqy/ml_ws/bangkit-ws/data/bizit-dev_test-data/32.jpg'
+im = '/home/irizqy/ml_ws/bangkit-ws/data/test/2_20230507_092258.jpg'
+# im = '/home/irizqy/ml_ws/bangkit-ws/data/bizit-dev_test-data/32.jpg'
 # im = '/home/irizqy/Downloads/rfc.jpg'
 
 with open(im, "rb") as f:
@@ -18,5 +18,5 @@ data =  {
     "image": im_b64
 }
 
-req = requests.post('http://127.0.0.1:8000/ld_predict', data=json.dumps(data), headers=headers)
+req = requests.post('http://127.0.0.1:3000/ld_predict', data=json.dumps(data), headers=headers)
 print(req.json())

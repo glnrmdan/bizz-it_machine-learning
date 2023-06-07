@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from PIL import Image
 from app.model import ImageParser
-from app.utils import cropped_detected_im
+import app.utils as utils
 import tensorflow as tf
 import numpy as np
 import base64
@@ -28,8 +28,6 @@ def index():
 
 @app.post('/ld_predict')
 async def detect_logo(im: ImageParser):
-    if type(im.image) != str:
-        JSONResponse(status_code=400, content={'message': 'Bad Request'})
     try:
         img_bytes = base64.b64decode(im.image.encode('utf-8'))
         im = Image.open(io.BytesIO(img_bytes))
@@ -43,7 +41,7 @@ async def detect_logo(im: ImageParser):
         input_tensor = input_tensor[tf.newaxis, ...]
         detections = ld_detector(input_tensor)
 
-        cropped_ims = cropped_detected_im(detections, im_arr)
+        cropped_ims = utils.cropped_detected_im(detections, im_arr)
 
         if not cropped_ims:
             return JSONResponse(status_code=200, content={'message': 'No Logo Found in the Image'})
@@ -58,4 +56,4 @@ async def detect_logo(im: ImageParser):
         return JSONResponse(status_code=200, content=response_json)
     
     except Exception:
-        return JSONResponse(status_code=500, content={'message': 'Internal Server Error'})
+        JSONResponse(status_code=400, content={'message': 'Bad Request'})
