@@ -21,5 +21,5 @@ def cropped_detected_im(detections, im, save_path=os.getcwd()):
     return cropped_ims
 
 
-if __name__ == '__main__':
+def check_franchise_availability():
     pass

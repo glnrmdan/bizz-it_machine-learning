@@ -4,7 +4,7 @@ import json
 
 
 # request data
-im = '/home/irizqy/ml_ws/bangkit-ws/data/test/2_20230507_092258.jpg'
+im = '/home/irizqy/ml_ws/bangkit-ws/data/temp/jj_6.jpeg'
 # im = '/home/irizqy/ml_ws/bangkit-ws/data/bizit-dev_test-data/32.jpg'
 # im = '/home/irizqy/Downloads/rfc.jpg'
 

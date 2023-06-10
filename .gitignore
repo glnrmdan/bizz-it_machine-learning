@@ -15,6 +15,7 @@ src/logo-detector/efficientnet512_ft/
 src/logo-detector/ssd_mobilenet_v2_ft
 src/logo-detector/trained_model/
 src/logo-detector/output/
+src/logo-detector/log/
 src/logo-detector/ssd_mobilenet_v2/
 src/logo-detector/im_similar/
 src/ops/app/model/im_similar_v1/
@@ -22,6 +23,7 @@ src/ops/app/model/model_v1/
 bizit-dev_test-data/
 data/bizit-dev_train-data/
 data/LogoDet-3K
+data/cropped_logo
 data/test
 data/bizit-dev_train-data2/
 data/temp

@@ -71,9 +71,10 @@ def make_train_test_pairs(data_path: str, percentage: float, use_gray:bool = Fal
 
         arr_length -= 1
 
-    return np.asarray(train_pairs), np.asarray(train_labels), np.asarray(test_pairs), np.asarray(test_labels)
+    return (np.asarray(train_pairs), np.asarray(train_labels)), (np.asarray(test_pairs), np.asarray(test_labels))
+
 
 if __name__ == '__main__':
     DATASET_PATH = '/home/irizqy/ml_ws/bangkit-ws/data/bizz.it-sim_dataset'
 
-    train_pairs, train_labels, test_pairs, test_labels = make_train_test_pairs(DATASET_PATH, .2)
+    (train_pairs, train_labels), (test_pairs, test_labels) = make_train_test_pairs(DATASET_PATH, .2)
