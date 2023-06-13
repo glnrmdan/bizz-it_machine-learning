@@ -1,21 +1,24 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-from app.model import ImageParser
-import app.functions as utils
+from model import ImageParser
+import functions as utils
 import tensorflow as tf
 import numpy as np
 import base64
+import tensorflow.keras.backend as K
+import uvicorn
+import tensorflow as tf
 import cv2 as cv
 
 
 # logo detector model path
 LD_MODEL_PATH = './app/model/model_v1/saved_model/'
-LD_LABEL_PATH = '/home/irizqy/ml_ws/bangkit-ws/data/label_map.pbtxt'
-
+IS_MODEL_PATH = './app/model/im_similar_v1/'
 FR_MODEL_PATH = None
 
-ld_detector = tf.saved_model.load(LD_MODEL_PATH)
 
+ld_detector = tf.saved_model.load(LD_MODEL_PATH)
+im_similarity = tf.keras.models.load_model(IS_MODEL_PATH)
 
 app = FastAPI()
 
@@ -34,15 +37,12 @@ async def detect_logo(im: ImageParser):
         im_arr = cv.cvtColor(im_arr, cv.COLOR_BGR2RGB)
         im_arr = cv.resize(im_arr, (512, 512))
 
-        # take only RGB values from RGBA images
-        if im_arr.shape[2] == 4:
-            im_arr = im_arr[:, :, :3]
-
         input_tensor = tf.convert_to_tensor(im_arr)
         input_tensor = input_tensor[tf.newaxis, ...]
         detections = ld_detector(input_tensor)
 
         cropped_ims = utils.cropped_detected_im(detections, im_arr)
+        utils.check_franchise_availability(cropped_ims, im_similarity)
 
         if not cropped_ims:
             return JSONResponse(status_code=200, content={'message': 'No Logo Found in the Image'})
@@ -60,3 +60,6 @@ async def detect_logo(im: ImageParser):
     
     except Exception:
         JSONResponse(status_code=400, content={'message': 'Bad Request'})
+
+if __name__ == '__main__':
+    uvicorn.run("main:app", port=3000, log_level="info", host='0.0.0.0')

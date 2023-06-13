@@ -1,6 +1,12 @@
 import numpy as np
-from PIL import Image
+import cv2 as cv
 import os
+import requests
+import json
+
+
+API_URL = 'https://bizzit-387412.as.r.appspot.com/franchises'
+
 
 def cropped_detected_im(detections, im, save_path=os.getcwd()):
     width, height, _ = im.shape
@@ -16,10 +22,22 @@ def cropped_detected_im(detections, im, save_path=os.getcwd()):
         (left, right, top, bottom) = (xmin*width, xmax*width, ymin*height, ymax*height)
         cropped_im = im[int(top):int(bottom), int(left):int(right)]
         cropped_ims.append(cropped_im)
-        Image.fromarray(cropped_im).save(f'{save_path}/cropped-logo{i}.jpg')
 
     return cropped_ims
 
 
-def check_franchise_availability():
-    pass
+def get_franchise_data(uri=API_URL):
+    franchises = json.loads(requests.get(uri).content.decode())['data']
+    _data = {}
+
+    for franchise in franchises:
+        _data['id'] = franchise['id']
+        _data['logo'] = franchise['logo']
+
+    return _data
+
+
+
+def check_franchise_availability(cropped_ims, model):
+    # get all franchise data
+    franchises = get_franchise_data()
