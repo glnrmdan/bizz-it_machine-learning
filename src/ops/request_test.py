@@ -1,6 +1,7 @@
 import base64
 import requests
 import json
+import time
 
 
 # request data
@@ -18,5 +19,7 @@ data =  {
     "image": im_b64
 }
 
+now = time.time()
 req = requests.post('http://127.0.0.1:3000/ld_predict', data=json.dumps(data), headers=headers)
-print(req.json())
+print(req.content.decode())
+print(time.time() - now)

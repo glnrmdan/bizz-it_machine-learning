@@ -42,17 +42,16 @@ async def detect_logo(im: ImageParser):
         detections = ld_detector(input_tensor)
 
         cropped_ims = utils.cropped_detected_im(detections, im_arr)
-        utils.check_franchise_availability(cropped_ims, im_similarity)
-
-        if not cropped_ims:
-            return JSONResponse(status_code=200, content={'message': 'No Logo Found in the Image'})
-
+        franchise_id, score, other_preds = utils.check_franchise_availability(cropped_ims, im_similarity)
+        # if len(cropped_ims) == 0 or cropped_ims == 0:
+        #     return JSONResponse(status_code=200, content={'message': 'No Logo Found in the Image'})
+        
         response_json = {
             'message': 'Ok',
             'data': {
-                'franchise_id: ': len(cropped_ims),
-                # 'confidence_score': confidence,
-                # ''
+                'franchise_id: ': franchise_id,
+                'confidence_score': np.round(score, 3),
+                'other_predictions': other_preds
             }
         }
 
